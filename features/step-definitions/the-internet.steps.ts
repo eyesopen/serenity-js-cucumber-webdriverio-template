@@ -1,9 +1,34 @@
-import { Given, Then, When } from '@cucumber/cucumber';
+import { After, AfterAll, Before, BeforeStep, Given, Then, When } from '@cucumber/cucumber';
 import { Actor, actorInTheSpotlight } from '@serenity-js/core';
 import { Navigate } from '@serenity-js/web';
 
 import { Authenticate, VerifyAuthentication } from '../../test/authentication';
 import { PickExample } from '../../test/examples';
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+Before(async() => {
+    console.log(`Before @ ${new Date().toISOString()}`);
+    await sleep(2000);
+    console.log(`Before finished @ ${new Date().toISOString()}`);
+});
+
+BeforeStep(({pickleStep}) => {
+    console.log(`${pickleStep.text} @ ${new Date().toISOString()}`);
+});
+
+After(async() => {
+    console.log(`After @ ${new Date().toISOString()}`);
+    await sleep(2000);
+    console.log(`After finished @ ${new Date().toISOString()}`);
+});
+AfterAll(async () => {
+    console.log(`AfterAll @ ${new Date().toISOString()}`);
+    await sleep(2000);
+    console.log(`AfterAll finished @ ${new Date().toISOString()}`);
+
+});
+
 
 /**
  * Below step definitions use Cucumber Expressions
@@ -36,4 +61,6 @@ Then(/.* should see that authentication has (succeeded|failed)/, async (expected
         VerifyAuthentication[expectedOutcome](),
     )
 );
+
+
 

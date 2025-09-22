@@ -2,6 +2,12 @@ import { WebdriverIOConfig } from '@serenity-js/webdriverio';
 
 export const config: WebdriverIOConfig = {
 
+    afterTest: async function(){
+        console.log(`afterTest @ ${new Date().toISOString()}`);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log(`afterTest finished @ ${new Date().toISOString()}`);
+    },
+
     // =========================
     // Serenity/JS Configuration
     // =========================

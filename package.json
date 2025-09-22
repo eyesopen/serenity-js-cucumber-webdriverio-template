@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rimraf target",
     "test": "failsafe clean test:execute test:report",
+    "test:debug": "failsafe clean test:execute",
     "test:execute": "wdio wdio.conf.ts",
     "test:report": "serenity-bdd run --features ./features",
     "start": "mkdirp target/site/serenity && npx http-server -p 8080 target/site/serenity -s -o",
