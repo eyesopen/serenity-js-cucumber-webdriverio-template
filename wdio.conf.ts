@@ -1,6 +1,11 @@
 import { WebdriverIOConfig } from '@serenity-js/webdriverio';
 
 export const config: WebdriverIOConfig = {
+    beforeTest: async function(){
+        console.log(`beforeTest @ ${new Date().toISOString()}`);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log(`beforeTest finished @ ${new Date().toISOString()}`);
+    },
 
     afterTest: async function(){
         console.log(`afterTest @ ${new Date().toISOString()}`);
@@ -35,7 +40,7 @@ export const config: WebdriverIOConfig = {
     automationProtocol: 'webdriver',
     // ==================
     // Specify Test Files
-    // ==================
+    // ==================v
     // Define which test specs should run. The pattern is relative to the directory
     // from which `wdio` was called.
     //
